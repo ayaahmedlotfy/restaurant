@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('details', function (Blueprint $table) {
+        Schema::create('food_order', function (Blueprint $table) {
             $table->integer('quantity');
-
             $table->unsignedBigInteger('food_id')->nullable();
             $table->foreign('food_id')->references('id')->on('foods');
-
             $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders');
-
             $table->timestamps();
         });
     }
