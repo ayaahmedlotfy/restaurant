@@ -14,7 +14,6 @@ class FoodController extends Controller
     public function index()
     {
        return Food::all();
-        //  return " done";
     }
 
     /**
@@ -34,16 +33,16 @@ class FoodController extends Controller
         $food->price=$request->price;
         $image = $request->file('image');
 
-        $imageName = time().'.'.$image->getClientOriginalExtension();  
+        $imageName = time().'.'.$image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
 
-        $food->image = $imageName; 
-       
+        $food->image = $imageName;
+
         $food->save();
-      
+
         // $food->food_id=Auth::id();
-      
-        
+
+
 
     }
 
@@ -76,9 +75,9 @@ class FoodController extends Controller
 
         if($request->hasFile('image')){
             $image = $request->file('image');
-            $imageName = time().'.'.$image->getClientOriginalExtension();  
+            $imageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName);
-            $food->image = $imageName; 
+            $food->image = $imageName;
         }
         $food->save();
 
@@ -92,7 +91,12 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
-        Food::destroy($id);
-        File::delete($imageName);
+        $i=Food::find($id);
+        $currphoto=$i->image;
+         $userPhoto=public_path('images/').$currphoto;
+         if (file_exists($userPhoto)){
+             @unlink($userPhoto);
+         }
+          Food::destroy($id);
     }
 }
