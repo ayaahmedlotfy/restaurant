@@ -68,8 +68,6 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*git commit -m "uploading image and saving in data base 
-plus successfully creating data in foods table post and get and delete"*/
 
         $food = Food::find($id);
         $food->name=$request->name;
