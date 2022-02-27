@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-class UserController extends Controller
+
+class DetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -25,14 +34,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user=new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->phone=$request->phone;
-        $user->address=$request->address;
-        $user->password=$request->password;
-        $user->save();
+        //
     }
 
     /**
@@ -43,9 +45,19 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user=User::find($id);
-     return new UserResource($user);
-        }
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -56,14 +68,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->phone=$request->phone;
-        $user->address=$request->address;
-        // $user->password=$request->password;
-
-        $user->save();
+        //
     }
 
     /**
@@ -74,7 +79,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return "destroyed";
+        //
     }
 }
