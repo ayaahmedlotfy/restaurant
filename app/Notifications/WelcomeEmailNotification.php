@@ -7,19 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class orderOperations extends Notification implements ShouldQueue
+class WelcomeEmailNotification extends Notification
 {
     use Queueable;
-    private $OrderData;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($OrderData)
+    public function __construct()
     {
-        $this->OrderData=$OrderData;
+        //
     }
 
     /**
@@ -42,9 +41,9 @@ class orderOperations extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->OrderData['body'])
-                    ->action($this->OrderData['orderText'])//->action($this->OrderData['orderText'],$this->OrderData['url'])
-                    ->line($this->OrderData['Thankyou']);
+        ->line($this->registerData['body'])
+        ->action($this->registerData['orderText'])//->action($this->OrderData['orderText'],$this->OrderData['url'])
+        ->line($this->registerData['Thankyou']);
     }
 
     /**
@@ -53,13 +52,11 @@ class orderOperations extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-  
-
     public function toArray($notifiable)
     {
         return [
-            'user_id' => $this->OrderData['user_id'],
-            'body' => $this->OrderData['body'],
+            'user_id' => $this->registerData['user_id'],
+            'body' => $this->registerData['body'],
         ];
     }
 }

@@ -40,7 +40,7 @@ class OrderController extends Controller
         $OrderData=[
             'body'=>"The order has been created",
             'orderText'=>"your order will be shipped",
-            'url'=>"/foods",
+            // 'url'=>"/foods",
             'Thankyou'=>"Thank you for making order",
             'user_id'=>auth('api')->user()->id
         ];
