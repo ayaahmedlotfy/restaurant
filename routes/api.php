@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::delete('/foods/{id}',[FoodController::class, "destroy"] )->middleware(['auth:sanctum']);
 
 
+ Route::get('/send-ordercreatedtext',[OrderCreatedController::class, "sendTextNotification"])->middleware(['auth:sanctum']);
 
  Route::get('/users',[UserController::class, "index"] )->middleware(['auth:sanctum']);
  Route::post('/users',[UserController::class, "store"] )->middleware(['auth:sanctum']);
