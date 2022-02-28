@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
             $table->dateTime('departure_time');
             $table->dateTime('arrival');
+
+            $table->unsignedBigInteger('order_id')->nullable();
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

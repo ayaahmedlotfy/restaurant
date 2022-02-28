@@ -5,7 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\Food_OrderController;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -58,8 +64,28 @@ Route::middleware(['auth:sanctum'])->group(function(){
  Route::get('/users',[UserController::class, "index"]);
  Route::post('/users',[UserController::class, "store"]);
  Route::get('/users/{id}',[UserController::class, "show"]);
- Route::patch('/users/{id}',[UserController::class, "update"]);
+ Route::post('/users/{id}',[UserController::class, "update"]);
  Route::delete('/users/{id}',[UserController::class, "destroy"]);
+
+ Route::get('/orders',[OrderController::class, "index"] );
+ Route::post('/orders',[OrderController::class, "store"] );
+ Route::get('/orders/{id}',[OrderController::class, "show"] );
+ Route::post('/orders/{id}',[OrderController::class, "update"] );
+ Route::delete('/orders/{id}',[OrderController::class, "destroy"] );
+
+
+Route::get("/deliveries",[DeliveryController::class,'index']);
+Route::post('/deliveries',[DeliveryController::class, "store"] );
+Route::get("/deliveries/{id}",[DeliveryController::class,'show']);
+Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
+// Route::delete("/deliveries/{id}",[DeliveryController::class,'destroy']);
+
+
+ Route::get('/food_orders',[Food_OrderController::class, "index"] );
+ Route::post('/food_orders',[Food_OrderController::class, "store"] );
+ Route::get('/food_orders/{id}',[Food_OrderController::class, "show"] );
+ Route::post('/food_orders/{id}',[Food_OrderController::class, "update"] );
+ Route::delete('/food_orders/{id}',[Food_OrderController::class, "destroy"] );
 });
 
 

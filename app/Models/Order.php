@@ -9,7 +9,10 @@ class Order extends Model
 {
     use HasFactory;
 
-    
+    protected $table = 'orders';
+    protected $fillable = ['user_id','payment_id'];
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,7 +20,7 @@ class Order extends Model
 
     public function delivery()
     {
-        return $this->belongsTo(Delivery::class);
+        return $this->hasOne(Delivery::class);
     }
 
     public function payment()
@@ -29,5 +32,11 @@ class Order extends Model
     public function foods()
     {
         return $this->belongsToMany(Food::class);
+    }
+
+// many to many
+    public function food_order()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

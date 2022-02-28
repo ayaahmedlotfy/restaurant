@@ -26,4 +26,9 @@ class Food extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function food_order()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
