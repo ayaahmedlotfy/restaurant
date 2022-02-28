@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class orderCreated extends Notification
+class orderOperations extends Notification implements ShouldQueue
 {
     use Queueable;
     private $OrderData;
@@ -53,10 +53,13 @@ class orderCreated extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
+  
+
     public function toArray($notifiable)
     {
         return [
-            //
+            'user_id' => $this->OrderData['user_id'],
+            'body' => $this->OrderData['body'],
         ];
     }
 }
