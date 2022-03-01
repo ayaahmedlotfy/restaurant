@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Http\Resources\FoodResource;
+
+
 class FoodController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-       return Food::all();
+            return Food::all();
 
     }
 
