@@ -6,7 +6,7 @@ use App\Notifications\orderOperations;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\Models\Order;
-
+use App\Models\User;
 class OrderController extends Controller
 {
     /**
@@ -34,8 +34,10 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $Order=new Order();
-        $Order->user_id=$request->auth('api')->user();
-        // $Order->payment_id=$request->payment_id;
+        $user = User::find(2);//=auth('api')->user();
+        
+        $Order->user_id=2;
+        //  $Order->payment_id=$request->payment_id;
         $Order->save();
         $OrderData=[
             'body'=>"The order has been created",
@@ -44,7 +46,8 @@ class OrderController extends Controller
             'Thankyou'=>"Thank you for making order",
             'user_id'=>auth('api')->user()->id
         ];
-        (auth('api')->user())->notify(new orderCreated($OrderData));
+        $user->notify(new orderCreated($OrderData));
+        // (auth('api')->user())->notify(new orderCreated($OrderData));
         // Notifications::sendNow((auth('api')->user()),new orderCreated($OrderData));
         return "Done";
     }

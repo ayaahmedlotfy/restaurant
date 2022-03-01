@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\quot;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Notifications\WelcomeEmailNotification;
-
+// use App\Notifications\WelcomeEmailNotification;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     /**
@@ -35,15 +37,7 @@ class UserController extends Controller
         $user->address=$request->address;
         $user->password=$request->password;
         $user->save();
-        $id=User::find($request->email)->id;
-        $registerData=[
-            'body'=>'Welcome to our website '.$request->name,
-            'orderText'=>"you've sign up to our website",
-            // 'url'=>"/foods",
-            'Thankyou'=>"Thanks for you registration",
-            'user_id'=>$id
-        ];
-        $user->notify(new WelcomeEmailNotification($registerData));
+        Mail::to($request->email)->send(new WelcomeMail());
     }
 
     /**
