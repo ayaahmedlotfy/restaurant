@@ -5,8 +5,9 @@ use App\Http\Controllers\quot;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\Models\User;
-// use App\Notifications\WelcomeEmailNotification;
 use App\Mail\WelcomeMail;
+use App\Mail\UpdatedUserMail;
+use App\Mail\DeleteUserMail;
 use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
@@ -38,6 +39,7 @@ class UserController extends Controller
         $user->password=$request->password;
         $user->save();
         Mail::to($request->email)->send(new WelcomeMail());
+        return "Stored";
     }
 
     /**
@@ -69,6 +71,8 @@ class UserController extends Controller
         // $user->password=$request->password;
 
         $user->save();
+        Mail::to($request->email)->send(new UpdatedUserMail());
+        return "Updated";
     }
 
     /**
@@ -80,6 +84,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
+        Mail::to($request->email)->send(new DeleteUserMail());
         return "destroyed";
     }
 }
