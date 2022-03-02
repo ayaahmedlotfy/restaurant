@@ -42,9 +42,9 @@ class orderOperations extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->OrderData['body'])
-                    ->action($this->OrderData['orderText'])//->action($this->OrderData['orderText'],$this->OrderData['url'])
-                    ->line($this->OrderData['Thankyou']);
+                    ->line($this->OrderData['Hello'].' '.$this->OrderData['username'])
+                    ->line($this->OrderData['orderText'])
+                    ->line($this->OrderData['Thankyou']);                 
     }
 
     /**
@@ -58,8 +58,7 @@ class orderOperations extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'user_id' => $this->OrderData['user_id'],
-            'body' => $this->OrderData['body'],
+         
         ];
     }
 }

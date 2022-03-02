@@ -34,22 +34,17 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $Order=new Order();
-        $user = User::find(2);//=auth('api')->user();
-        
-        $Order->user_id=2;
-        //  $Order->payment_id=$request->payment_id;
+        $user=auth('api')->user();
+        $Order->user_id=$user['id'];
         $Order->save();
         $OrderData=[
-            'body'=>"The order has been created",
+            'Hello'=>"Hello from our team we are here to help you",
+            'username'=>$user['name'],
             'orderText'=>"your order will be shipped",
-            // 'url'=>"/foods",
             'Thankyou'=>"Thank you for making order",
-            'user_id'=>auth('api')->user()->id
         ];
-        $user->notify(new orderCreated($OrderData));
-        // (auth('api')->user())->notify(new orderCreated($OrderData));
-        // Notifications::sendNow((auth('api')->user()),new orderCreated($OrderData));
-        return "Done";
+        $user->notify(new orderOperations($OrderData));
+         return "Done";
     }
 
     /**
@@ -60,7 +55,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        if (Order::find($id))
+       if (Order::find($id))
        return Order::find($id);
        else
        return "there is no order with this id";
@@ -84,17 +79,17 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         if(Order::find($id)){
+            $user=auth('api')->user();
             $Order=Order::find($id);
-            $Order->user_id=$request->user_id;
-            // $Order->payment_id=$request->payment_id;
+            $Order->user_id=$user['id'];
             $Order->save();
             $OrderData=[
-                'body'=>"The order has been updated",
+                'Hello'=>"Hello from our team we are here to help you",
+                'username'=>$user['name'],
                 'orderText'=>"you will get your order as you updated it",
-                'url'=>"/foods",
                 'Thankyou'=>"Thank you"
             ];
-            Notifications::sendNow((auth('api')->user()),new orderOperations($OrderData));
+            $user->notify(new orderCreated($OrderData));
             return "updated";
             }
             else{
@@ -112,14 +107,15 @@ class OrderController extends Controller
     {
         if(Order::find($id)){
             Order::destroy($id);
+            $user=auth('api')->user();
             $OrderData=[
                 'body'=>"The order has been cancelled",
                 'orderText'=>"your order has been cancelled",
                 'url'=>"/foods",
                 'Thankyou'=>"Thank you"
             ];
-            Notifications::sendNow((auth('api')->user()),new orderOperations($OrderData));
-            return "Deleted";
+            $user->notify(new orderCreated($OrderData));
+             return "Deleted";
             }
             else
             return "There is no order with this id";
