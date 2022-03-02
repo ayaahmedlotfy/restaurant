@@ -16,7 +16,8 @@ class FoodController extends Controller
      */
     public function index()
     {
-            return Food::all();
+            // return Food::all();
+            return FoodResource::collection(Food::all());
 
     }
 
@@ -36,7 +37,9 @@ class FoodController extends Controller
         $food->description=$request->description;
         $food->price=$request->price;
         $food->category_id=$request->category_id;
+
         $image = $request->file('image');
+        $food->imagepath=$image;
 
         $imageName = time().'.'.$image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);

@@ -13,6 +13,6 @@ class HomeController extends Controller
     if($role=="1"){
         return view("dashboard")."admin dashboard";}
     else{
-        return view("dashboard")."userrrrrrrrrrrrr dashboard";}
+        return "userrrrrrrrrrrrr dashboard";}
     }
 }
