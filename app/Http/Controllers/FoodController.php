@@ -37,9 +37,11 @@ class FoodController extends Controller
         $food->description=$request->description;
         $food->price=$request->price;
         $food->category_id=$request->category_id;
+        $food->numOfItem=$request->numOfItem;
 
         $image = $request->file('image');
         $food->imagepath=$image;
+
 
         $imageName = time().'.'.$image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);

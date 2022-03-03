@@ -9,7 +9,7 @@ class Food extends Model
 {
     use HasFactory;
     protected $table = 'foods';
-    protected $fillable = ['description','name' , 'price' ,'image','imagepath'];
+    protected $fillable = ['description','name' , 'price' ,'image','imagepath','numOfItem'];
 
 
     public function order()
