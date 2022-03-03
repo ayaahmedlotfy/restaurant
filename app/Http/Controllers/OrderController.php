@@ -40,11 +40,12 @@ class OrderController extends Controller
         $OrderData=[
             'Hello'=>"Hello from our team we are here to help you",
             'username'=>$user['name'],
-            'orderText'=>"your order will be shipped",
+            'id'=>$user['id'],
+            'orderText'=>"you've created your order and it will be delivered for you soon",
             'Thankyou'=>"Thank you for making order",
         ];
         $user->notify(new orderOperations($OrderData));
-         return "Done";
+        return "Done";
     }
 
     /**
@@ -86,7 +87,8 @@ class OrderController extends Controller
             $OrderData=[
                 'Hello'=>"Hello from our team we are here to help you",
                 'username'=>$user['name'],
-                'orderText'=>"you will get your order as you updated it",
+                'id'=>$user['id'],
+                'orderText'=>"you've updated your order and you gonna receive it as as you updated it",
                 'Thankyou'=>"Thank you"
             ];
             $user->notify(new orderCreated($OrderData));
@@ -109,9 +111,10 @@ class OrderController extends Controller
             Order::destroy($id);
             $user=auth('api')->user();
             $OrderData=[
-                'body'=>"The order has been cancelled",
+                'Hello'=>"Hello from our team we are here to help you",
+                'username'=>$user['name'],
+                'id'=>$user['id'],
                 'orderText'=>"your order has been cancelled",
-                'url'=>"/foods",
                 'Thankyou'=>"Thank you"
             ];
             $user->notify(new orderCreated($OrderData));

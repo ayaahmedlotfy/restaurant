@@ -30,7 +30,7 @@ class orderOperations extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -58,7 +58,9 @@ class orderOperations extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-         
+           'user_name'=>$this->OrderData['username'],
+           'user_id'=>$this->OrderData['id'],
+           'message'=>$this->OrderData['orderText']
         ];
     }
 }

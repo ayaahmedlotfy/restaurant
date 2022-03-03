@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,3 +38,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::get('/users/{id}',[UserController::class, "show"] )->middleware(['auth:sanctum']);
  Route::patch('/users/{id}',[UserController::class, "update"] )->middleware(['auth:sanctum']);
  Route::delete('/users/{id}',[UserController::class, "destroy"] )->middleware(['auth:sanctum']);
+
+ Route::get('/notifications',[NotificationController::class, "index"] );//->middleware(['auth:sanctum']);

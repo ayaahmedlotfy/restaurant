@@ -98,7 +98,6 @@ class UserController extends Controller
         if(User::find($id)){
             $user = User::find($id)->email;
             User::destroy($id);
-            Mail::to($request->email)->send(new DeleteUserMail());
             return "destroyed";
         }
         else
