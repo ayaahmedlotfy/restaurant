@@ -20,7 +20,7 @@ class FoodResource extends JsonResource
 "price"=>$this->price,
 "description"=>$this->description,
 "imagepath"=>$this->imagepath,
-"image"=>$this->image,
+// "image"=>$this->image,
 "cartCounter"=>$this->numOfItem,
 
 "category"=>new CategoryResource($this->category)
