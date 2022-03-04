@@ -38,7 +38,7 @@ class FoodController extends Controller
         $food->price=$request->price;
         $food->category_id=$request->category_id;
         $food->numOfItem=$request->numOfItem;
-        $food->image=$request->image;
+        // $food->image=$request->image;
         $food->imagepath=$request->imagepath;
 
 

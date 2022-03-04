@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("name");
             $table->text("description");
             $table->string("price");
-            $table->string("image");
+            // $table->string("image");
             $table->string("imagepath");
             $table->string('numOfItem')->default(0);
 
