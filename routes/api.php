@@ -1,11 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Http;
-use App\Http\Controllers\FoodController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\FatooraController;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Http;
+// use App\Http\Controllers\FoodController;
+// use App\Http\Controllers\CategoryController;
+// <<<<<<< HEAD
+// use App\Http\Controllers\FatooraController;
+// =======
+// >>>>>>> 14129fa37207723d6d71a1769973216c6a700394
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
@@ -48,17 +51,41 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
+
+Route::post('/sanctum/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'device_name' => 'required',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    return $user->createToken($request->device_name)->plainTextToken;
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// <<<<<<< HEAD
+// Route::middleware(['auth:sanctum'])->group(function(){
+// =======
 Route::middleware(['auth:sanctum'])->group(function(){
+
 
  Route::get('/foods',[FoodController::class, "index"]);
  Route::post('/foods',[FoodController::class, "store"]);
  Route::get('/foods/{id}',[FoodController::class, "show"]);
  Route::post('/foods/{id}',[FoodController::class, "update"]);
  Route::delete('/foods/{id}',[FoodController::class, "destroy"]);
+
 
  Route::get('/categories',[CategoryController::class, "index"]);
  Route::post('/categories',[CategoryController::class, "store"]);
@@ -79,11 +106,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
  Route::delete('/orders/{id}',[OrderController::class, "destroy"] );
 
 
-    Route::get("/deliveries",[DeliveryController::class,'index']);
-    Route::post('/deliveries',[DeliveryController::class, "store"] );
-    Route::get("/deliveries/{id}",[DeliveryController::class,'show']);
-    Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
-    // Route::delete("/deliveries/{id}",[DeliveryController::class,'destroy']);
+Route::get("/deliveries",[DeliveryController::class,'index']);
+Route::post('/deliveries',[DeliveryController::class, "store"] );
+Route::get("/deliveries/{id}",[DeliveryController::class,'show']);
+Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
+// Route::delete("/deliveries/{id}",[DeliveryController::class,'destroy']);
 
 
  Route::get('/food_orders',[Food_OrderController::class, "index"] );
@@ -91,26 +118,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
  Route::get('/food_orders/{id}',[Food_OrderController::class, "show"] );
  Route::post('/food_orders/{id}',[Food_OrderController::class, "update"] );
  Route::delete('/food_orders/{id}',[Food_OrderController::class, "destroy"] );
+
  
 });
  
-// Route::middleware(['auth:sanctum'])->group(function () {
-
-  
-//     Route::get('/foods',[FoodController::class, "index"]);
-//     Route::post('/foods',[FoodController::class, "store"]);
-//     Route::get('/foods/{id}',[FoodController::class, "show"]);
-//     Route::post('/foods/{id}',[FoodController::class, "update"]);
-//     Route::delete('/foods/{id}',[FoodController::class, "destroy"]);
-
-//     Route::get('/users',[UserController::class, "index"] );
-//     Route::post('/users',[UserController::class, "store"] );
-//     Route::get('/users/{id}',[UserController::class, "show"] );
-//     Route::patch('/users/{id}',[UserController::class, "update"]);
-//     Route::delete('/users/{id}',[UserController::class, "destroy"]);
-
-// });
-
-
-
-

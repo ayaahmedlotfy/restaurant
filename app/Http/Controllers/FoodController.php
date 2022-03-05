@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Http\Resources\FoodResource;
+
+
 class FoodController extends Controller
 {
     /**
@@ -13,7 +16,9 @@ class FoodController extends Controller
      */
     public function index()
     {
-       return Food::all();
+            // return Food::all();
+            return FoodResource::collection(Food::all());
+
     }
 
     /**
@@ -31,18 +36,22 @@ class FoodController extends Controller
         $food->name=$request->name;
         $food->description=$request->description;
         $food->price=$request->price;
-        $image = $request->file('image');
+        $food->category_id=$request->category_id;
+        $food->numOfItem=$request->numOfItem;
+        // $food->image=$request->image;
+        $food->imagepath=$request->imagepath;
 
-        $imageName = time().'.'.$image->getClientOriginalExtension();
-        $image->move(public_path('images'), $imageName);
 
-        $food->image = $imageName;
+        // $image = $request->file('image');
+        // $food->imagepath=$image;
+
+
+        // $imageName = time().'.'.$image->getClientOriginalExtension();
+        // $image->move(public_path('images'), $imageName);
+
+        // $food->image = $imageName;
 
         $food->save();
-
-        // $food->food_id=Auth::id();
-
-
 
     }
 
@@ -54,8 +63,8 @@ class FoodController extends Controller
      */
     public function show($id)
     {
-        //
-        return Food::find($id);
+        $food=Food::find($id);
+        return new FoodResource($food);
     }
 
     /**

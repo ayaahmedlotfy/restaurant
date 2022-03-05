@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Delivery;
 
 class DeliveryController extends Controller
 {
@@ -13,7 +14,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        //
+        return Delivery::all();
     }
 
     /**
@@ -21,10 +22,7 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,8 +32,14 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $delivery = new Delivery();
+        $delivery->departure_time=$request->departure_time;
+        $delivery->arrival=$request->arrival;
+        $delivery->order_id=$request->order_id;
+        $delivery->save();
+        return "stored dellivery";
     }
+
 
     /**
      * Display the specified resource.
@@ -45,7 +49,10 @@ class DeliveryController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Delivery::find($id))
+        return Delivery::find($id);
+        else
+        return "There is no Delivery with this id";
     }
 
     /**
@@ -54,10 +61,6 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,8 +71,17 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $delivery = Delivery::find($id);
+        $delivery->departure_time=$request->departure_time;
+        $delivery->arrival=$request->arrival;
+        $delivery->order_id=$request->order_id;
+
+        $delivery->save();
+        return "updated dellivery";
+
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -79,6 +91,11 @@ class DeliveryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Delivery::find($id)){
+        Delivery::destroy($id);
+        return "Deleted";
+        }
+        else
+        return "There is no Delivery with this id";
     }
 }

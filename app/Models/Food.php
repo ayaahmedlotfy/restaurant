@@ -9,7 +9,7 @@ class Food extends Model
 {
     use HasFactory;
     protected $table = 'foods';
-    protected $fillable = ['description','name' , 'price' ,'image'];
+    protected $fillable = ['description','name' , 'price' ,'imagepath','numOfItem'];
 
 
     public function order()
@@ -23,6 +23,11 @@ class Food extends Model
     }
 
     public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function food_order()
     {
         return $this->belongsTo(Category::class);
     }

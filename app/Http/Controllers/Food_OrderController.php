@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use  App\Models\Food_Order;
 class Food_OrderController extends Controller
 {
     /**
@@ -13,17 +13,7 @@ class Food_OrderController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+     return Food_Order::all();
     }
 
     /**
@@ -34,7 +24,12 @@ class Food_OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $details=new Food_Order();
+        $details->quantity=$request->quantity;
+        $details->food_id=$request->food_id;
+        $details->order_id=$request->order_id;
+
+        $details->save();
     }
 
     /**
@@ -45,19 +40,9 @@ class Food_OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return Food_Order::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +53,12 @@ class Food_OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $details = Food_Order::find($id);
+        $details->quantity=$request->quantity;
+        $details->food_id=$request->food_id;
+        $details->order_id=$request->order_id;
+        $details->save();
+        return "Done";
     }
 
     /**
@@ -79,6 +69,6 @@ class Food_OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Food_Order::destroy($id);
     }
 }

@@ -13,10 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('deliveries', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('departure_time');
-            $table->dateTime('arrival');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('role')->default(0);
+
+
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -28,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deliveries');
+        Schema::dropIfExists('users');
     }
 };
