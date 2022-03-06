@@ -1,16 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FoodController;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FatooraController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\Food_OrderController;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+
+
 
 
 
@@ -24,6 +28,29 @@ use Illuminate\Validation\ValidationException;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/pay',[FatooraController::class,'payOrder']); //add middleware
+Route::get('call_back',[FatooraController::class,'paymentCallBack']);
+Route::get('error',function(){
+    return "payment faild";
+});
+
+Route::post('/sanctum/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'device_name' => 'required',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    return $user->createToken($request->device_name)->plainTextToken;
+});
 
 
 Route::post('/sanctum/token', function (Request $request) {
@@ -59,7 +86,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//  Route::middleware(['auth:sanctum'])->group(function(){
+//Route::middleware(['auth:sanctum'])->group(function(){
+
 
  Route::get('/foods',[FoodController::class, "index"]);
  Route::post('/foods',[FoodController::class, "store"]);
@@ -99,6 +127,6 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::get('/food_orders/{id}',[Food_OrderController::class, "show"] );
  Route::post('/food_orders/{id}',[Food_OrderController::class, "update"] );
  Route::delete('/food_orders/{id}',[Food_OrderController::class, "destroy"] );
-//  });
 
+//  });
 
