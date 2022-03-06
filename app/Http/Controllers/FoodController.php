@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Http\Resources\FoodResource;
+use  Illuminate\Support\Facades\Auth;
 
 
 class FoodController extends Controller
@@ -17,7 +18,10 @@ class FoodController extends Controller
     public function index()
     {
             // return Food::all();
-            return FoodResource::collection(Food::all());
+            $role=Auth::user()->role;
+            if($role =='1'){
+            return FoodResource::collection(Food::all());}
+            else{return "u are user u can not access to dashboard";}
 
     }
 

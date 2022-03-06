@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("price");
             // $table->string("image");
             $table->string("imagepath");
-            $table->string('numOfItem')->default(0);
+            $table->string('numOfItem')->default(0)->nullable();
 
 
 

@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,11 +44,22 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
+
+
+
+
+
+
+
+
+
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::middleware(['auth:sanctum'])->group(function(){
+ Route::middleware(['auth:sanctum'])->group(function(){
 
  Route::get('/foods',[FoodController::class, "index"]);
  Route::post('/foods',[FoodController::class, "store"]);
@@ -86,6 +99,6 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::get('/food_orders/{id}',[Food_OrderController::class, "show"] );
  Route::post('/food_orders/{id}',[Food_OrderController::class, "update"] );
  Route::delete('/food_orders/{id}',[Food_OrderController::class, "destroy"] );
-// });
+ });
 
 
