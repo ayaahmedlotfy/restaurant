@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\orderOperations;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
-use App\Models\Order;
->>>>>>> aya
 
+
+use App\Models\Order;
+use App\Models\User;
 class OrderController extends Controller
 {
     /**
@@ -17,11 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //
-=======
         return Order::all();
->>>>>>> aya
     }
 
     /**
@@ -29,13 +26,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function create()
-    {
-        //
-    }
-=======
->>>>>>> aya
+
 
     /**
      * Store a newly created resource in storage.
@@ -45,15 +36,29 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
+
+
         //
-=======
+
+        // $Order=new Order();
+        // $Order->user_id=$request->user_id;
+        // // $Order->payment_id=$request->payment_id;
+        // $Order->save();
+        // return "Done";
+
         $Order=new Order();
-        $Order->user_id=$request->user_id;
-        // $Order->payment_id=$request->payment_id;
+        $user=auth('api')->user();
+        $Order->user_id=$user['id'];
         $Order->save();
+        $OrderData=[
+            'Hello'=>"Hello from our team we are here to help you",
+            'username'=>$user['name'],
+            'id'=>$user['id'],
+            'orderText'=>"you've created your order and it will be delivered for you soon",
+            'Thankyou'=>"Thank you for making order",
+        ];
+        $user->notify(new orderOperations($OrderData));
         return "Done";
->>>>>>> aya
     }
 
     /**
@@ -64,14 +69,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
-        //
-=======
-        if (Order::find($id))
+
+       if (Order::find($id))
        return Order::find($id);
        else
        return "there is no order with this id";
->>>>>>> aya
     }
 
     /**
@@ -80,14 +82,6 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function edit($id)
-    {
-        //
-    }
-=======
-
->>>>>>> aya
 
     /**
      * Update the specified resource in storage.
@@ -98,20 +92,32 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-        //
-=======
+
+        // if(Order::find($id)){
+        //     $Order=Order::find($id);
+        //     $Order->user_id=$request->user_id;
+        //     // $Order->payment_id=$request->payment_id;
+        //     $Order->save();
+
         if(Order::find($id)){
+            $user=auth('api')->user();
             $Order=Order::find($id);
-            $Order->user_id=$request->user_id;
-            // $Order->payment_id=$request->payment_id;
+            $Order->user_id=$user['id'];
             $Order->save();
+            $OrderData=[
+                'Hello'=>"Hello from our team we are here to help you",
+                'username'=>$user['name'],
+                'id'=>$user['id'],
+                'orderText'=>"you've updated your order and you gonna receive it as as you updated it",
+                'Thankyou'=>"Thank you"
+            ];
+            $user->notify(new orderCreated($OrderData));
             return "updated";
             }
             else{
                 return "There is no order with this id";
             }
->>>>>>> aya
+
     }
 
     /**
@@ -122,15 +128,28 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        //
-=======
+
+        // if(Order::find($id)){
+        //     Order::destroy($id);
+        //     return "Deleted";
+        //     }
+        //     else
+        //     return "There is no order with this id";
+
         if(Order::find($id)){
             Order::destroy($id);
-            return "Deleted";
+            $user=auth('api')->user();
+            $OrderData=[
+                'Hello'=>"Hello from our team we are here to help you",
+                'username'=>$user['name'],
+                'id'=>$user['id'],
+                'orderText'=>"your order has been cancelled",
+                'Thankyou'=>"Thank you"
+            ];
+            $user->notify(new orderCreated($OrderData));
+             return "Deleted";
             }
             else
             return "There is no order with this id";
->>>>>>> aya
     }
 }

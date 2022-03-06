@@ -14,9 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-
-
-
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,11 +120,17 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
 // Route::delete("/deliveries/{id}",[DeliveryController::class,'destroy']);
 
 
- Route::get('/food_orders',[Food_OrderController::class, "index"] );
- Route::post('/food_orders',[Food_OrderController::class, "store"] );
- Route::get('/food_orders/{id}',[Food_OrderController::class, "show"] );
- Route::post('/food_orders/{id}',[Food_OrderController::class, "update"] );
- Route::delete('/food_orders/{id}',[Food_OrderController::class, "destroy"] );
+
+ Route::get('/food_order',[Food_OrderController::class, "index"] );
+ Route::post('/food_order',[Food_OrderController::class, "store"] );
+ Route::get('/food_order/{id}',[Food_OrderController::class, "show"] );
+ Route::post('/food_order/{id}',[Food_OrderController::class, "update"] );
+ Route::delete('/food_order/{id}',[Food_OrderController::class, "destroy"] );
+
+ Route::get('/notifications',[NotificationController::class, "index"] );
+
 
 //  });
+
+
 
