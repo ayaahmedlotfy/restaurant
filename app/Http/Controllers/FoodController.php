@@ -18,10 +18,7 @@ class FoodController extends Controller
     public function index()
     {
             // return Food::all();
-            $role=Auth::user()->role;
-            if($role =='1'){
-            return FoodResource::collection(Food::all());}
-            else{return "u are user u can not access to dashboard";}
+            return FoodResource::collection(Food::all());
 
     }
 
@@ -35,6 +32,8 @@ class FoodController extends Controller
     {
         //  $table->unsignedBigInteger('category_id')->nullable();
         //  $table->foreign('category_id')->references('id')->on('categories');
+        $role=Auth::user()->role;
+        if($role =='1'){
 
         $food=new Food();
         $food->name=$request->name;
@@ -56,6 +55,8 @@ class FoodController extends Controller
         // $food->image = $imageName;
 
         $food->save();
+    }
+    else{return "u are user u can not store food";}
 
     }
 
@@ -80,19 +81,22 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $role=Auth::user()->role;
+        if($role =='1'){
+            $food = Food::find($id);
+            $food->name=$request->name;
+            $food->description=$request->description;
+            $food->price=$request->price;
 
-        $food = Food::find($id);
-        $food->name=$request->name;
-        $food->description=$request->description;
-        $food->price=$request->price;
-
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $food->image = $imageName;
-        }
-        $food->save();
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+                $food->image = $imageName;
+            }
+            $food->save();
+    }
+    else{return "u are user u can not update food";}
 
     }
 
@@ -104,6 +108,8 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
+        $role=Auth::user()->role;
+        if($role =='1'){
         $i=Food::find($id);
         $currphoto=$i->image;
          $userPhoto=public_path('images/').$currphoto;
@@ -111,5 +117,7 @@ class FoodController extends Controller
              @unlink($userPhoto);
          }
           Food::destroy($id);
+        }
+        else{return "u are user u can not delete food";}
     }
 }
