@@ -1,19 +1,18 @@
 <?php
 
 // use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Route;
-// use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 // use App\Http\Controllers\FoodController;
-// use App\Http\Controllers\CategoryController;
-// <<<<<<< HEAD
-// use App\Http\Controllers\FatooraController;
-// =======
-// >>>>>>> 14129fa37207723d6d71a1769973216c6a700394
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FatooraController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\Food_OrderController;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -74,9 +73,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// <<<<<<< HEAD
-// Route::middleware(['auth:sanctum'])->group(function(){
-// =======
 Route::middleware(['auth:sanctum'])->group(function(){
 
 
