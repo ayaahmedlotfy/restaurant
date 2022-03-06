@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     use HasFactory;
-    protected $fillable = ['description','name' , 'price' ,'image' ,'imgpath'];
+    protected $table = 'foods';
+    protected $fillable = ['description','name' , 'price' ,'imagepath','numOfItem'];
 
 
     public function order()
@@ -22,6 +23,11 @@ class Food extends Model
     }
 
     public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function food_order()
     {
         return $this->belongsTo(Category::class);
     }

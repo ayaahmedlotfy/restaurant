@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string("name");
             $table->text("description");
             $table->string("price");
-            $table->string("image");
-            $table->string("imgpath");
+            // $table->string("image");
+            $table->string("imagepath");
+            $table->string('numOfItem')->default(0)->nullable();
+
+
 
              $table->unsignedBigInteger('category_id')->nullable();
              $table->foreign('category_id')->references('id')->on('categories');

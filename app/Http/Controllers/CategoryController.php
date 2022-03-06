@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use  App\Models\Category;
+>>>>>>> aya
 
 class CategoryController extends Controller
 {
@@ -13,7 +17,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //
+=======
+        return Category::all();
+>>>>>>> aya
     }
 
     /**
@@ -24,7 +32,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         //
+=======
+        $category=new Category();
+        $category->name=$request->name;
+        $category->save();
+>>>>>>> aya
     }
 
     /**
@@ -35,7 +49,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+<<<<<<< HEAD
         //
+=======
+        return Category::find($id);
+>>>>>>> aya
     }
 
 
@@ -48,7 +66,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         //
+=======
+        $category = Category::find($id);
+        $category->name=$request->name;
+        $category->save();
+
+>>>>>>> aya
     }
 
     /**
@@ -59,6 +84,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         //
+=======
+        Category::destroy($id);
+>>>>>>> aya
     }
 }

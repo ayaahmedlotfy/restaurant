@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use App\Models\Order;
+>>>>>>> aya
 
 class OrderController extends Controller
 {
@@ -13,7 +17,11 @@ class OrderController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //
+=======
+        return Order::all();
+>>>>>>> aya
     }
 
     /**
@@ -21,10 +29,13 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function create()
     {
         //
     }
+=======
+>>>>>>> aya
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +45,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         //
+=======
+        $Order=new Order();
+        $Order->user_id=$request->user_id;
+        // $Order->payment_id=$request->payment_id;
+        $Order->save();
+        return "Done";
+>>>>>>> aya
     }
 
     /**
@@ -45,7 +64,14 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+<<<<<<< HEAD
         //
+=======
+        if (Order::find($id))
+       return Order::find($id);
+       else
+       return "there is no order with this id";
+>>>>>>> aya
     }
 
     /**
@@ -54,10 +80,14 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function edit($id)
     {
         //
     }
+=======
+
+>>>>>>> aya
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +98,20 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         //
+=======
+        if(Order::find($id)){
+            $Order=Order::find($id);
+            $Order->user_id=$request->user_id;
+            // $Order->payment_id=$request->payment_id;
+            $Order->save();
+            return "updated";
+            }
+            else{
+                return "There is no order with this id";
+            }
+>>>>>>> aya
     }
 
     /**
@@ -79,6 +122,15 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         //
+=======
+        if(Order::find($id)){
+            Order::destroy($id);
+            return "Deleted";
+            }
+            else
+            return "There is no order with this id";
+>>>>>>> aya
     }
 }
