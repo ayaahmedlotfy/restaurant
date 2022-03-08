@@ -79,6 +79,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function(){
 
 
+ Route::post('/login',[AuthenticatedSessionController::class, "store"]);
+ Route::post('/logout',[AuthenticatedSessionController::class, "destroy"]);
+ Route::post('/register',[RegisteredUserController::class, "store"]);
+
+
  Route::get('/foods',[FoodController::class, "index"]);
  Route::post('/foods',[FoodController::class, "store"]);
  Route::get('/foods/{id}',[FoodController::class, "show"]);
@@ -122,7 +127,7 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::get('/notifications',[NotificationController::class, "index"] );
 
 
- });
+  });
 
 
 
