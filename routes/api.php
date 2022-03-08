@@ -11,6 +11,8 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\Food_OrderController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -70,21 +72,11 @@ Route::post('/sanctum/token', function (Request $request) {
 });
 
 
-
-
-
-
-
-
-
-
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::middleware(['auth:sanctum'])->group(function(){
+Route::middleware(['auth:sanctum'])->group(function(){
 
 
  Route::get('/foods',[FoodController::class, "index"]);
@@ -130,7 +122,7 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::get('/notifications',[NotificationController::class, "index"] );
 
 
-//  });
+ });
 
 
 
