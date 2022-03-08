@@ -43,7 +43,6 @@ class FatooraService{
     }
 
 
-
     public function sendPayment($data){
 
          $response = $this->buildRequest('v2/sendPayment','POST',$data);

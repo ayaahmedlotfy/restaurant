@@ -1,9 +1,8 @@
 <?php
 
-// use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
-// use App\Http\Controllers\FoodController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FatooraController;
 use App\Http\Controllers\UserController;
@@ -32,48 +31,48 @@ Route::get('error',function(){
     return "payment faild";
 });
 
-Route::post('/sanctum/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
-    ]);
+// Route::post('/sanctum/token', function (Request $request) {
+//     $request->validate([
+//         'email' => 'required|email',
+//         'password' => 'required',
+//         'device_name' => 'required',
+//     ]);
 
-    $user = User::where('email', $request->email)->first();
+//     $user = User::where('email', $request->email)->first();
 
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
+//     if (! $user || ! Hash::check($request->password, $user->password)) {
+//         throw ValidationException::withMessages([
+//             'email' => ['The provided credentials are incorrect.'],
+//         ]);
+//     }
 
-    return $user->createToken($request->device_name)->plainTextToken;
-});
+//     return $user->createToken($request->device_name)->plainTextToken;
+// });
 
 
-Route::post('/sanctum/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
-    ]);
+// Route::post('/sanctum/token', function (Request $request) {
+//     $request->validate([
+//         'email' => 'required|email',
+//         'password' => 'required',
+//         'device_name' => 'required',
+//     ]);
 
-    $user = User::where('email', $request->email)->first();
+//     $user = User::where('email', $request->email)->first();
 
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
+//     if (! $user || ! Hash::check($request->password, $user->password)) {
+//         throw ValidationException::withMessages([
+//             'email' => ['The provided credentials are incorrect.'],
+//         ]);
+//     }
 
-    return $user->createToken($request->device_name)->plainTextToken;
-});
+//     return $user->createToken($request->device_name)->plainTextToken;
+// });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->group(function(){
+// Route::middleware(['auth:sanctum'])->group(function(){
 
 
  Route::get('/foods',[FoodController::class, "index"]);
@@ -116,5 +115,5 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::delete('/food_orders/{id}',[Food_OrderController::class, "destroy"] );
 
  
-});
+// });
  
