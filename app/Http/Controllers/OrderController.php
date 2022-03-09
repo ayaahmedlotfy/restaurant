@@ -47,7 +47,7 @@ class OrderController extends Controller
         // return "Done";
 
         $Order=new Order();
-        $user=auth('api')->user();
+       $user= Auth::user();
         $Order->user_id=$user['id'];
         $Order->save();
         $OrderData=[
@@ -100,7 +100,7 @@ class OrderController extends Controller
         //     $Order->save();
 
         if(Order::find($id)){
-            $user=auth('api')->user();
+            $user= Auth::user();
             $Order=Order::find($id);
             $Order->user_id=$user['id'];
             $Order->save();
@@ -138,7 +138,7 @@ class OrderController extends Controller
 
         if(Order::find($id)){
             Order::destroy($id);
-            $user=auth('api')->user();
+            $user= Auth::user();
             $OrderData=[
                 'Hello'=>"Hello from our team we are here to help you",
                 'username'=>$user['name'],
