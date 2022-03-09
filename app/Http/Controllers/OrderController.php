@@ -6,7 +6,7 @@ use App\Notifications\orderOperations;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 
-
+use  Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\User;
 class OrderController extends Controller
@@ -47,8 +47,8 @@ class OrderController extends Controller
         // return "Done";
 
         $Order=new Order();
-        $user=User::find(2);
-      // $user= Auth::user();
+        //$user=User::find(2);
+        $user= Auth::user();
         $Order->user_id=$user['id'];
         $Order->save();
         $OrderData=[
@@ -101,8 +101,8 @@ class OrderController extends Controller
         //     $Order->save();
 
         if(Order::find($id)){
-            $user=User::find(2);
-         // $user= Auth::user();
+            //$user=User::find(2);
+            $user= Auth::user();
             $Order=Order::find($id);
             $Order->user_id=$user['id'];
             $Order->save();
@@ -140,8 +140,8 @@ class OrderController extends Controller
 
         if(Order::find($id)){
             Order::destroy($id);
-            $user=User::find(2);
-            // $user= Auth::user();
+            //$user=User::find(2);
+            $user= Auth::user();
             $OrderData=[
                 'Hello'=>"Hello from our team we are here to help you",
                 'username'=>$user['name'],
