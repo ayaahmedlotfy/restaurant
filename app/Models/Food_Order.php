@@ -13,14 +13,14 @@ class Food_Order extends Model
 
 
 
-    public function foods()
+    public function food()
     {
-        return $this->hasMany(Food::class);
+        return $this->belongsTo(Food::class);
     }
 
 
-    public function orders()
+    public function order()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Order::class);
     }
 }

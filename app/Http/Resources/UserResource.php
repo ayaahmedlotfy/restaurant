@@ -19,7 +19,6 @@ class UserResource extends JsonResource
             "User_Email"=>$this->email,
             "User_Address"=>$this->address,
             "User_Phone"=>$this->phone,
-            "Order_details"=>new OrderResource($this->orders)
         ];
     }
 }

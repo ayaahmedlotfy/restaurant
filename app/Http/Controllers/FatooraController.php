@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
-// use vendor\autoload;
+
 use Illuminate\Http\Request;
 use App\Http\Services\FatooraService;
 use Illuminate\Support\Facades\Http;
-
+use App\Models\Transaction;
+use App\Http\Resources\TransactionResource;
 class FatooraController extends Controller
 {
     /**
@@ -15,6 +16,7 @@ class FatooraController extends Controller
     public function index()
     {
         //
+        return TransactionResource::collection(Transaction::all());
     }
 
     private $FatooraService;
@@ -74,6 +76,17 @@ class FatooraController extends Controller
     public function store(Request $request)
     {
         //
+        $transaction=new Transaction();
+        $transaction->user_name=$request->user_name;
+        $transaction->email=$request->email;
+        $transaction->phone=$request->phone;
+        $transaction->InvoiceId=$request->InvoiceId;
+        $transaction->InvoiceURL=$request->InvoiceURL;
+        $transaction->total_price=$request->total_price;
+        $transaction->status=$request->status;
+        $transaction->PaymentId=$request->PaymentId;
+        $transaction->save();
+        
     }
 
     /**

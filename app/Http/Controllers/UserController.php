@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\quot;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\WelcomeMail;
+use App\Mail\UpdatedUserMail;
+use App\Mail\DeleteUserMail;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     /**
@@ -33,6 +38,8 @@ class UserController extends Controller
         $user->address=$request->address;
         $user->password=$request->password;
         $user->save();
+        Mail::to($request->email)->send(new WelcomeMail());
+        return "Stored";
     }
 
     /**
@@ -43,9 +50,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user=User::find($id);
-     return new UserResource($user);
+        if(User::find($id))
+        {
+             $user=User::find($id);
+            return new UserResource($user);
         }
+        else{
+            return "There is no user with this id";
+        }
+       
+    }
 
     /**
      * Update the specified resource in storage.
@@ -56,14 +70,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(User::find($id))
+        {
         $user = User::find($id);
         $user->name=$request->name;
         $user->email=$request->email;
         $user->phone=$request->phone;
         $user->address=$request->address;
         // $user->password=$request->password;
-
+        
         $user->save();
+        Mail::to($request->email)->send(new UpdatedUserMail());
+        return "Updated";
+        }
+        else
+        return "There is no user with this id";
     }
 
     /**
@@ -74,7 +95,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return "destroyed";
+        if(User::find($id)){
+            $user = User::find($id)->email;
+            User::destroy($id);
+            return "destroyed";
+        }
+        else
+        return "There is no user with this id";
+       
     }
 }

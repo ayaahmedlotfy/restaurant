@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Notification;
 
-class PaymentController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,11 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+    $notifications=Notification::all();
+    foreach ($notifications as $notification)
+    {
+    return var_dump($notification->data); 
+    }
     }
 
     /**

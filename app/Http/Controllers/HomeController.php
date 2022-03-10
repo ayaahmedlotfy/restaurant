@@ -9,10 +9,10 @@ class HomeController extends Controller
 {
     public function index(){
 
-    $role=Auth::user()->role;
-    if($role=="1"){
-        return view("dashboard")."admin dashboard";}
-    else{
-        return "userrrrrrrrrrrrr dashboard";}
+    // $role=Auth::user()->role;
+    // if($role=="1"){
+    //     return "1" ;}
+    // else{
+    //     return "0";}
     }
 }

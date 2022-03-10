@@ -12,10 +12,10 @@ class Food extends Model
     protected $fillable = ['description','name' , 'price' ,'imagepath','numOfItem'];
 
 
-    public function order()
-    {
-        return $this->belongsToMany(Order::class);
-    }
+    // public function order()
+    // {
+    //     return $this->belongsToMany(Order::class);
+    // }
 
     public function user()
     {
@@ -27,8 +27,8 @@ class Food extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function food_order()
+    public function food_orders()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Food_Order::class);
     }
 }
