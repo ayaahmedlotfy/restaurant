@@ -15,15 +15,19 @@ class FoodResource extends JsonResource
     public function toArray($request)
     {
        return[
-"id"=>$this->id,
-"name"=>$this->name,
-"price"=>$this->price,
-"description"=>$this->description,
-"imagepath"=>$this->imagepath,
-// "image"=>$this->image,
-"cartCounter"=>$this->numOfItem,
+
+
+        "id"=>$this->id,
+        "name"=>$this->name,
+        "price"=>$this->price,
+        "description"=>$this->description,
+        "imagepath"=>$this->imagepath,
+        // "image"=>$this->image,
+        "cartCounter"=>$this->numOfItem,
+        // "category"=>new CategoryResource($this->category)
 
 "category_id"=>new CategoryResource($this->category)
+
 
        ];
     }
