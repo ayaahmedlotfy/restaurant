@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class Transaction extends Model
 {
     use HasFactory;
-    protected $fillable = ['total_price','payment_type'];
+    protected $fillable = ['user_name','email','phone','InvoiceId','InvoiceURL','total_price','status','PaymentId'];
 
 
     public function order()

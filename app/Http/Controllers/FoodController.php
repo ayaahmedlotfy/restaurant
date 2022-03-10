@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Models\Order;
 use App\Http\Resources\FoodResource;
 use  Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,7 @@ class FoodController extends Controller
     public function index()
     {
             // return Food::all();
+            
             return FoodResource::collection(Food::all());
 
     }
@@ -32,8 +34,8 @@ class FoodController extends Controller
     {
         //  $table->unsignedBigInteger('category_id')->nullable();
         //  $table->foreign('category_id')->references('id')->on('categories');
-        $role=Auth::user()->role;
-        if($role =='1'){
+        // $role=Auth::user()->role;
+        // if($role =='1'){
 
         $food=new Food();
         $food->name=$request->name;
@@ -55,8 +57,8 @@ class FoodController extends Controller
         // $food->image = $imageName;
 
         $food->save();
-    }
-    else{return "u are user u can not store food";}
+    // }
+    // else{return "u are user u can not store food";}
 
     }
 

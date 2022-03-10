@@ -43,15 +43,10 @@ class FatooraService{
     }
 
 
-
     public function sendPayment($data){
 
          $response = $this->buildRequest('v2/sendPayment','POST',$data);
          return $response;
-        // if($response){
-        //     $this->saveTransactionPayment($customar_id,$response['Data']['InvoiceId']);
-        // }
-        // return $response;
     }
 
     

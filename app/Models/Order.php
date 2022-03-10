@@ -23,20 +23,19 @@ class Order extends Model
         return $this->hasOne(Delivery::class);
     }
 
-    public function payment()
+    public function transaction()
     {
-        return $this->hasOne(Payment::class);
+        return $this->hasOne(Transaction::class);
     }
 
-
-    public function foods()
-    {
-        return $this->belongsToMany(Food::class);
-    }
+    // public function foods()
+    // {
+    //     return $this->belongsToMany(Food::class);
+    // }
 
 // many to many
     public function food_order()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Food_Order::class);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use  App\Models\Food_Order;
+use App\Http\Resources\Food_OrderResource;
+
 class Food_OrderController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class Food_OrderController extends Controller
      */
     public function index()
     {
-     return Food_Order::all();
+         return Food_OrderResource::collection(Food_Order::all());
+        // return Food_Order::all();
     }
 
     /**
@@ -40,7 +43,7 @@ class Food_OrderController extends Controller
      */
     public function show($id)
     {
-        return Food_Order::find($id);
+        return new Food_OrderResource(Food_Order::find($id));
     }
 
 
