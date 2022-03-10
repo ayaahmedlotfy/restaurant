@@ -83,7 +83,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::delete('/orders/{id}',[OrderController::class, "destroy"] );
 //  Route::get('/transactions',[FatooraController::class, "index"] );
 
-//  Route::get('/transactions',[FatooraController::class, "index"] );
+ Route::get('/transactions',[FatooraController::class, "index"] );
 
 Route::get("/deliveries",[DeliveryController::class,'index']);
 Route::post('/deliveries',[DeliveryController::class, "store"] );
