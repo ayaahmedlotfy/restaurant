@@ -9,12 +9,15 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\Food_OrderController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ForgotPassController;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+// use Illuminate\Support\Facades\Hash;
+// use Illuminate\Validation\ValidationException;
 
-use App\Http\Controllers\NotificationController;
+// use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,44 +42,7 @@ Route::post('/sanctum/token', function (Request $request) {
         'device_name' => 'required',
     ]);
 
-    $user = User::where('email', $request->email)->first();
-
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-
-    return $user->createToken($request->device_name)->plainTextToken;
 });
-
-
-Route::post('/sanctum/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
-    ]);
-
-    $user = User::where('email', $request->email)->first();
-
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-
-    return $user->createToken($request->device_name)->plainTextToken;
-});
-
-
-
-
-
-
-
-
-
 
 
 
@@ -84,8 +50,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::middleware(['auth:sanctum'])->group(function(){
+// public routes
+    Route::post('/register',[RegisteredUserController::class, "store"]);
+    Route::post('/login',[AuthenticatedSessionController::class, "store"]);
+    Route::post('/logout',[AuthenticatedSessionController::class, "destroy"])->middleware('auth:sanctum');
+    Route::post('/forgot-password',[ForgotPassController::class, "forgot"]);
+    Route::post('/reset-password',[ForgotPassController::class, "reset"]);
 
+
+// Route::middleware(['auth:sanctum'])->group(function(){
+
+     
 
  Route::get('/foods',[FoodController::class, "index"]);
  Route::post('/foods',[FoodController::class, "store"]);

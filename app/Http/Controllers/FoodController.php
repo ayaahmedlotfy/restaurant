@@ -32,8 +32,8 @@ class FoodController extends Controller
     {
         //  $table->unsignedBigInteger('category_id')->nullable();
         //  $table->foreign('category_id')->references('id')->on('categories');
-        $role=Auth::user()->role;
-        if($role =='1'){
+        // $role=Auth::user()->role;
+        // if($role =='1'){
 
         $food=new Food();
         $food->name=$request->name;
@@ -56,9 +56,9 @@ class FoodController extends Controller
 
         $food->save();
     }
-    else{return "u are user u can not store food";}
+    // else{return "u are user u can not store food";}
 
-    }
+    // }
 
     /**
      * Display the specified resource.
@@ -81,8 +81,8 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role=Auth::user()->role;
-        if($role =='1'){
+        // $role=Auth::user()->role;
+        // if($role =='1'){
             $food = Food::find($id);
             $food->name=$request->name;
             $food->description=$request->description;
@@ -96,9 +96,9 @@ class FoodController extends Controller
             }
             $food->save();
     }
-    else{return "u are user u can not update food";}
+    // else{return "u are user u can not update food";}
 
-    }
+    // }
 
     /**
      * Remove the specified resource from storage.
