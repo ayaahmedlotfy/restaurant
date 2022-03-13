@@ -9,6 +9,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\Food_OrderController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ContactController;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -98,6 +100,9 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::get('/food_order/{id}',[Food_OrderController::class, "show"] );
  Route::post('/food_order/{id}',[Food_OrderController::class, "update"] );
  Route::delete('/food_order/{id}',[Food_OrderController::class, "destroy"] );
+
+ Route::get('/contacts',[ContactController::class, "index"] );
+ Route::post('/contacts',[ContactController::class, "store"] );
 
  Route::get('/notifications',[NotificationController::class, "index"] );
 

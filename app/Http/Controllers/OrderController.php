@@ -42,8 +42,9 @@ class OrderController extends Controller
 
         $Order=new Order();
         //$user=User::find(2);
-        $user= Auth::user();
-        $Order->user_id=$user['id'];
+        // $user= Auth::user();
+        // $Order->user_id=$user['id'];
+        $Order->user_id=$request->user_id;
         $Order->save();
         return "Done";
 
