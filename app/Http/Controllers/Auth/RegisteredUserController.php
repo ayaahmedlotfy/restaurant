@@ -40,18 +40,12 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string','min:3', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => ['required', 'string','min:11', 'max:11'],
-            'address' => ['required', 'string','min:4', 'max:255'],
-
-
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            "address"=>$request->address,
-            "phone"=>$request->phone
         ]);
          Mail::to($request->email)->send(new WelcomeMail());
 
