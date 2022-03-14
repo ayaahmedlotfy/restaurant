@@ -107,9 +107,3 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
 
 //   });
 
-
-//Route::post('/orders',[OrderController::class, "store"] );
-
- //Route::post('/orders/{id}',[OrderController::class, "update"] );
-
-// Route::delete('/orders/{id}',[OrderController::class, "destroy"] );

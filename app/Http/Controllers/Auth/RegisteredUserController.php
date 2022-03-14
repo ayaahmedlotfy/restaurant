@@ -53,12 +53,13 @@ class RegisteredUserController extends Controller
             "address"=>$request->address,
             "phone"=>$request->phone
         ]);
+         Mail::to($request->email)->send(new WelcomeMail());
+
 
     //     event(new Registered($user));
 
 
         // Auth::login($user);
-        // Mail::to($request->email)->send(new WelcomeMail());
 
         // return redirect(RouteServiceProvider::HOME);
 
