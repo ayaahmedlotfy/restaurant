@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -32,6 +34,8 @@ class ContactController extends Controller
         $contactUs->email=$request->email;
         $contactUs->message=$request->message;
         $contactUs->save();
+
+        Mail::to($request->email)->send(new ContactUs());
         return "stored feedback";
     }
 

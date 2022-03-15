@@ -39,13 +39,16 @@ class orderOperations extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
+    // 'arrival_time'=>$delivery['arrival'],
+    // 'departure_time'=>$delivery['departure_time']
+
     public function toMail($notifiable)
     {
         return (new MailMessage)
                     ->line($this->OrderData['Hello'].' '.$this->OrderData['username'])
-                    ->line($this->OrderData['orderText'])
-                    ->line($this->OrderData['Thankyou'].' '. $this->OrderData['order_id']);                 
-    }
+                    ->line($this->OrderData['orderText'].' '. $this->OrderData['arrival'])             
+                    ->line($this->OrderData['Thankyou'].' '. $this->OrderData['order_id']);              
+            }
 
     /**
      * Get the array representation of the notification.

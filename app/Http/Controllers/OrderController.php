@@ -42,21 +42,16 @@ class OrderController extends Controller
         $Order=new Order();
         $Order->user_id=$request->user_id;
         $user=User::find($request->user_id);
-        $Order->save();
-
-        // $Order=new Order();
-        // $user=Auth::user();
-        // $Order->user_id=$user['id'];
         // $Order->save();
-        $OrderData=[
-            'Hello'=>"Hello from our team we are here to help you",
-            'username'=>$user['name'],
-            'id'=>$user['id'],
-            'orderText'=>"you've created your order and it will be delivered for you soon",
-            'Thankyou'=>"Thank you for making order and your order ID is ",
-            'order_id'=>$Order['id'],
-        ];
-        $user->notify(new orderOperations($OrderData));
+        // $OrderData=[
+        //     'Hello'=>"Hello from our team we are here to help you",
+        //     'username'=>$user['name'],
+        //     'id'=>$user['id'],
+        //     'orderText'=>"you've created your order and it will be delivered for you soon at ",
+        //     'Thankyou'=>"Thank you for making order and your order ID is ",
+        //     'order_id'=>$Order['id'],
+        // ];
+        // $user->notify(new orderOperations($OrderData));
         return "Done";
     }
 

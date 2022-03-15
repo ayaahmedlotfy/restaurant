@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\orderOperations;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use  App\Models\Food_Order;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Delivery;
 use App\Http\Resources\Food_OrderResource;
 
 class Food_OrderController extends Controller
@@ -32,7 +37,23 @@ class Food_OrderController extends Controller
         $details->food_id=$request->food_id;
         $details->order_id=$request->order_id;
 
+        $user=User::find($request->user_id);
+        $order=Order::find($request->order_id);
+        $quantity=$details->quantity;
+        $time=($quantity*5)+20;
+        $hours = floor($time / 60);
+        $minutes = $time % 60;
         $details->save();
+        $OrderData=[
+            'Hello'=>"Hello from our team we are here to help you",
+            'username'=>$user['name'],
+            'id'=>$user['id'],
+            'orderText'=>"you've created your order and it will be delivered for you after ",
+            'arrival'=>$hours.' hours and '.$minutes.' minutes',
+            'Thankyou'=>"Thank you for making order and your order ID is ",
+            'order_id'=>$details->order_id,
+        ];
+        $user->notify(new orderOperations($OrderData));
     }
 
     /**
