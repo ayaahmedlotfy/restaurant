@@ -36,9 +36,8 @@ class Food_OrderController extends Controller
         $details->quantity=$request->quantity;
         $details->food_id=$request->food_id;
         $details->order_id=$request->order_id;
-
-        $user=User::find($request->user_id);
-        $order=Order::find($request->order_id);
+        $order = Order::find($request->order_id);
+        $user=User::find($order->user_id);
         $quantity=$details->quantity;
         $time=($quantity*5)+20;
         $hours = floor($time / 60);

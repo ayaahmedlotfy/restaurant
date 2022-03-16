@@ -64,7 +64,8 @@ class orderOperations extends Notification implements ShouldQueue
            'user_name'=>$this->OrderData['username'],
            'user_id'=>$this->OrderData['id'],
            'message'=>$this->OrderData['orderText'],
-           'order_id'=>$this->OrderData['order_id']
+           'order_id'=>$this->OrderData['order_id'],
+           'arrival'=>$this->OrderData['arrival']
         ];
     }
 }
