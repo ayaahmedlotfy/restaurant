@@ -33,7 +33,7 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         //  $table->unsignedBigInteger('category_id')->nullable();
-        //  $table->foreign('category_id')->references('id')->on('categories');
+        //  $table->foreign('category_id')->references('id')->on('categories');1
         // $role=Auth::user()->role;
         // if($role =='1'){
 
@@ -83,8 +83,8 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role=Auth::user()->role;
-        if($role =='1'){
+        // $role=Auth::user()->role;
+        // if($role =='1'){
             $food = Food::find($id);
             $food->name=$request->name;
             $food->description=$request->description;
@@ -97,8 +97,8 @@ class FoodController extends Controller
                 $food->image = $imageName;
             }
             $food->save();
-    }
-    else{return "u are user u can not update food";}
+    // }
+    // else{return "u are user u can not update food";}
 
     }
 
@@ -110,8 +110,8 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
-        $role=Auth::user()->role;
-        if($role =='1'){
+        // $role=Auth::user()->role;
+        // if($role =='1'){
         $i=Food::find($id);
         $currphoto=$i->image;
          $userPhoto=public_path('images/').$currphoto;
@@ -119,7 +119,7 @@ class FoodController extends Controller
              @unlink($userPhoto);
          }
           Food::destroy($id);
-        }
-        else{return "u are user u can not delete food";}
+    //     }
+    //     else{return "u are user u can not delete food";}
     }
 }

@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\NotificationController;
 
-Route::post('/pay',[FatooraController::class,'store']); //add middleware
+Route::post('/pay',[FatooraController::class,'store']);
+Route::get('/pay',[FatooraController::class,'index']);
+Route::get('/pay/{user_name}',[FatooraController::class,'show']);
 Route::get('call_back',[FatooraController::class,'paymentCallBack']);
 Route::get('error',function(){
     return "payment faild";
@@ -85,7 +87,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::delete('/orders/{id}',[OrderController::class, "destroy"] );
 //  Route::get('/transactions',[FatooraController::class, "index"] );
 
- Route::get('/transactions',[FatooraController::class, "index"] );
+//  Route::get('/transactions',[FatooraController::class, "store"] );
+ Route::post('/transactions',[FatooraController::class, "store"] );
 
 Route::get("/deliveries",[DeliveryController::class,'index']);
 Route::post('/deliveries',[DeliveryController::class, "store"] );

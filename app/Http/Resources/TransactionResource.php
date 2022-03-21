@@ -15,7 +15,8 @@ class TransactionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "status"=>$this->status
+            "status"=>$this->status,
+            "invoiceUrl"=>$this->InvoiceURL
         ];
         
     }

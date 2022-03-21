@@ -23,32 +23,36 @@ class FatooraController extends Controller
     public function __construct(FatooraService $FatooraService){
         $this->FatooraService =  $FatooraService;
     }
-    public function payOrder()
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function payOrder(Request $request)
     {
-        // $user = Auth::User()->name;
         $data =[
-            'CustomerName'=> 'hala emad',
-            // 'CustomerName'       => '$user->name',
+            'CustomerName'=>$request->user_name,
+            // 'CustomerName'=>'hala ayaa',
             'NotificationOption'=>'Lnk', 
-            'InvoiceValue'=>'100',
-            'CustomerEmail'=> 'halaaa.abdelaziz95@gmail.com',
-            // 'CustomerEmail'      => '$user->email',
+            // 'InvoiceValue'=>'100',
+            'InvoiceValue'=>$request->total_price,
+            'CustomerEmail'=>$request->email,
+            // 'CustomerEmail'=>'haa@gmail.com',
+            'CustomerMobile'=>$request->phone,
             'CallBackUrl'=>'http://127.0.0.1:8000/api/call_back',
-            // 'ErrorUrl'           => env('error_url'), 
-            // 'CallBackUrl'        => "www.google.com",
+            // 'CallBackUrl'=>'http://127.0.0.1:4200/paid',
             'ErrorUrl'=>'https://www.youtube.com', 
             'Language'=>'en', 
             'DisplayCurrencyIso'=>'egp'
         ];
-       return  $this->FatooraService->sendPayment($data);
-
-       //transaction table
-       //invoiceid from post man pay route
-       //userId = auth::user()->id
-
-
-
-
+        return $this->FatooraService->sendPayment($data);
     }
     /**
      * Show the form for creating a new resource.
@@ -57,15 +61,20 @@ class FatooraController extends Controller
      */
     public function paymentCallBack(Request $request)
     {
-        // dd($request);
+        dd($request);
         $data=[];
         $data['Key']=$request->paymentId;
         $data['KeyType']='paymentId';
         
         $paymentData=$this->FatooraService->getPaymentStatus($data);
-        return $paymentData['Data']['InvoiceId']; 
+
+        $transaction=Transaction::find($InvoiceId);
+        $transaction->status='paid';
+        $transaction->save();
+        // return $paymentData['Data']['InvoiceId']; 
         // search in transaction table where id = $paymentData['Data']['InvoiceId'] to change status to paid 
 
+        return redirect()->away('http://127.0.0.1:4200/paid');
     }
     /**
      * Store a newly created resource in storage.
@@ -74,30 +83,35 @@ class FatooraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $datapay = $this->payOrder($request);
+    
         $transaction=new Transaction();
         $transaction->user_name=$request->user_name;
         $transaction->email=$request->email;
         $transaction->phone=$request->phone;
-        $transaction->InvoiceId=$request->InvoiceId;
-        $transaction->InvoiceURL=$request->InvoiceURL;
+        $transaction->InvoiceId=$datapay["Data"]["InvoiceId"];
+        $transaction->InvoiceURL=$datapay["Data"]["InvoiceURL"];
         $transaction->total_price=$request->total_price;
-        $transaction->status=$request->status;
-        $transaction->PaymentId=$request->PaymentId;
+        $transaction->order_id=$request->order_id;
+        // $transaction->status=$request->status;
+        // $transaction->PaymentId=$request->PaymentId;
         $transaction->save();
         
+        return $transaction;
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $order_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_name)
     {
         //
+       return Transaction::find($user_name);
     }
     /**
      * Show the form for editing the specified resource.
@@ -105,9 +119,18 @@ class FatooraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function editable(Request $request)
     {
         //
+        // $datapay = $this->payOrder();
+        // dd($datapay);
+        // $this->store($request);
     }
     /**
      * Update the specified resource in storage.
