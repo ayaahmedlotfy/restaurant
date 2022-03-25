@@ -26,7 +26,6 @@ class FatooraService{
     }
 
     private function buildRequest($uri,$method,$data){
-       
         $request = new Request($method,$this->base_url.$uri,$this->headers);
 
         if(!$data){
@@ -55,7 +54,7 @@ class FatooraService{
         $status = strtolower($data['Data']['TransactionStatus']);
    }
 
-   public function getPaymentStatus($data){ 
+    public function getPaymentStatus($data){ 
         return $this->buildRequest('v2/getPaymentStatus','POST',$data);
     }
 

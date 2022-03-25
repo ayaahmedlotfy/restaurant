@@ -33,7 +33,7 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         //  $table->unsignedBigInteger('category_id')->nullable();
-        //  $table->foreign('category_id')->references('id')->on('categories');
+        //  $table->foreign('category_id')->references('id')->on('categories');1
         // $role=Auth::user()->role;
         // if($role =='1'){
 
@@ -119,7 +119,7 @@ class FoodController extends Controller
              @unlink($userPhoto);
          }
           Food::destroy($id);
-        // }
-        // else{return "u are user u can not delete food";}
+    //     }
+    //     else{return "u are user u can not delete food";}
     }
 }
