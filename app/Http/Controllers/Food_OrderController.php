@@ -36,23 +36,23 @@ class Food_OrderController extends Controller
         $details->quantity=$request->quantity;
         $details->food_id=$request->food_id;
         $details->order_id=$request->order_id;
-        // $order = Order::find($request->order_id);
-        // $user=User::find($order->user_id);
-        // $quantity=$details->quantity;
-        // $time=($quantity*5)+20;
-        // $hours = floor($time / 60);
-        // $minutes = $time % 60;
+        $order = Order::find($request->order_id);
+        $user=User::find($order->user_id);
+        $quantity=$details->quantity;
+        $time=($quantity*5)+20;
+        $hours = floor($time / 60);
+        $minutes = $time % 60;
         $details->save();
-        // $OrderData=[
-        //     'Hello'=>"Hello from our team we are here to help you",
-        //     'username'=>$user['name'],
-        //     'id'=>$user['id'],
-        //     'orderText'=>"you've created your order and it will be delivered for you after ",
-        //     'arrival'=>$hours.' hours and '.$minutes.' minutes',
-        //     'Thankyou'=>"Thank you for making order and your order ID is ",
-        //     'order_id'=>$details->order_id,
-        // ];
-        // $user->notify(new orderOperations($OrderData));
+        $OrderData=[
+            'Hello'=>"Hello from our team we are here to help you",
+            'username'=>$user['name'],
+            'id'=>$user['id'],
+            'orderText'=>"you've created your order and it will be delivered for you after ",
+            'arrival'=>$hours.' hours and '.$minutes.' minutes',
+            'Thankyou'=>"Thank you for making order and your order ID is ",
+            'order_id'=>$details->order_id,
+        ];
+        $user->notify(new orderOperations($OrderData));
     }
 
     /**

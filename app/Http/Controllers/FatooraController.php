@@ -61,21 +61,20 @@ class FatooraController extends Controller
      */
     public function paymentCallBack(Request $request)
     {
-        dd($request);
+
         $data=[];
         $data['Key']=$request->paymentId;
         $data['KeyType']='paymentId';
 
         $paymentData=$this->FatooraService->getPaymentStatus($data);
 
-        // $transaction=Transaction::find($InvoiceId);
-        // $transaction->status='paid';
-        // $transaction->save();
-        // return $paymentData['Data']['InvoiceId'];
-        // search in transaction table where id = $paymentData['Data']['InvoiceId'] to change status to paid
+        $transaction=Transaction::where('InvoiceId','=',$paymentData['Data']['InvoiceId'])
+        ->limit(1)
+        ->update(['status' => $paymentData['Data']['InvoiceStatus']]);
 
         return redirect()->away('http://127.0.0.1:4200/paid');
     }
+
     /**
      * Store a newly created resource in storage.
      *
