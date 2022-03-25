@@ -40,8 +40,6 @@ class FatooraService{
         $response =json_decode($response->getBody(),true);
         return $response;
     }
-
-
     public function sendPayment($data){
 
          $response = $this->buildRequest('v2/sendPayment','POST',$data);
