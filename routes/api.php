@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Hash;
 // use Illuminate\Validation\ValidationException;
 
-// use App\Http\Controllers\NotificationController;
+ use App\Http\Controllers\NotificationController;
 
 
 Route::post('/pay',[FatooraController::class,'store']);
@@ -106,6 +106,7 @@ Route::post('/deliveries/{id}',[DeliveryController::class, "update"] );
  Route::post('/contacts',[ContactController::class, "store"] );
 
  Route::get('/notifications',[NotificationController::class, "index"] );
+
 
 
 //   });

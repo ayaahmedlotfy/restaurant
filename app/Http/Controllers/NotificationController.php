@@ -17,8 +17,9 @@ class NotificationController extends Controller
     $notifications=Notification::all();
     foreach ($notifications as $notification)
     {
-    return var_dump($notification->data); 
+     $last=$notification->data;
     }
+    return $last;
     }
 
     /**
@@ -50,7 +51,9 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        //
+
+$notification=Notification::find($id);
+return $notification;
     }
 
     /**
