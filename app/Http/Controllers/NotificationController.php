@@ -17,7 +17,7 @@ class NotificationController extends Controller
     $notifications=Notification::all();
     foreach ($notifications as $notification)
     {
-    return var_dump($notification->data); 
+    echo var_dump($notification->data); 
     }
     }
 

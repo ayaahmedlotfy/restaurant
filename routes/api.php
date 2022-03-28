@@ -12,7 +12,7 @@ use App\Http\Controllers\Food_OrderController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ContactController;
 
-
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ForgotPassController;
