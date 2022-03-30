@@ -5,7 +5,9 @@ use App\Http\Controllers\quot;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\WelcomeMail;
 use App\Mail\UpdatedUserMail;
+use App\Mail\DeleteUserMail;
 use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
@@ -36,6 +38,7 @@ class UserController extends Controller
         $user->address=$request->address;
         $user->password=$request->password;
         $user->save();
+        Mail::to($request->email)->send(new WelcomeMail());
         return "Stored";
     }
 

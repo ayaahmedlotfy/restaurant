@@ -27,8 +27,9 @@ class Food extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function food_orders()
+
+    public function food_order()
     {
-        return $this->hasMany(Food_Order::class);
+        return $this->belongsTo(Category::class);
     }
 }

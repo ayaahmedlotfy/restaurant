@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "59a0eea58e72e528bfec226e15223de6",
+=======
+    "content-hash": "7bfdc76e18202eabe754a34a14cc1578",
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
     "packages": [
         {
             "name": "brick/math",
@@ -695,6 +699,7 @@
         },
         {
             "name": "guzzlehttp/guzzle",
+<<<<<<< HEAD
             "version": "7.4.2",
             "source": {
                 "type": "git",
@@ -705,6 +710,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ac1ec1cd9b5624694c3a40be801d94137afb12b4",
                 "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4",
+=======
+            "version": "7.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "ee0a041b1760e6a53d2a39c8c34115adc2af2c79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ee0a041b1760e6a53d2a39c8c34115adc2af2c79",
+                "reference": "ee0a041b1760e6a53d2a39c8c34115adc2af2c79",
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
                 "shasum": ""
             },
             "require": {
@@ -799,7 +816,11 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/guzzle/guzzle/tree/7.4.2"
+=======
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.1"
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
             },
             "funding": [
                 {
@@ -815,7 +836,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-03-20T14:16:28+00:00"
+=======
+            "time": "2021-12-06T18:43:05+00:00"
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
         },
         {
             "name": "guzzlehttp/promises",

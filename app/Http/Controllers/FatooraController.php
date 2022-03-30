@@ -93,8 +93,6 @@ class FatooraController extends Controller
         $transaction->InvoiceURL=$datapay["Data"]["InvoiceURL"];
         $transaction->total_price=$request->total_price;
         $transaction->order_id=$request->order_id;
-         $transaction->status=$request->status;
-         $transaction->PaymentId=$request->PaymentId;
         $transaction->save();
 
         return $transaction;

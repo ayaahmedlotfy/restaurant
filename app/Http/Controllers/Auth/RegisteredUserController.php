@@ -11,8 +11,11 @@ use Illuminate\Http\Respnse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+<<<<<<< HEAD
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+=======
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
 
 class RegisteredUserController extends Controller
 {
@@ -37,7 +40,11 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+<<<<<<< HEAD
             'name' => ['required', 'string','min:3', 'max:255'],
+=======
+            'name' => ['required', 'string', 'max:255'],
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -47,6 +54,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+<<<<<<< HEAD
          Mail::to($request->email)->send(new WelcomeMail());
 
 
@@ -58,6 +66,14 @@ class RegisteredUserController extends Controller
         // return redirect(RouteServiceProvider::HOME);
 
 
+=======
+
+    //     event(new Registered($user));
+
+    //     Auth::login($user);
+
+    //     return redirect(RouteServiceProvider::HOME);
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
     // }
 
     $token = $user->createToken('myapptoken')->plainTextToken;
@@ -68,6 +84,9 @@ class RegisteredUserController extends Controller
         ];
 
         return response($response, 201);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 34d88f7eef4f555c7bab8b461a538f00f1b3acad
     }
 }

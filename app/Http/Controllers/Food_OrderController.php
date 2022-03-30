@@ -53,6 +53,8 @@ class Food_OrderController extends Controller
             'order_id'=>$details->order_id,
         ];
         $user->notify(new orderOperations($OrderData));
+
+        $details->save();
     }
 
     /**
