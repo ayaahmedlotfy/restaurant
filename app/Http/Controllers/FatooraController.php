@@ -5,7 +5,10 @@ use Illuminate\Http\Request;
 use App\Http\Services\FatooraService;
 use Illuminate\Support\Facades\Http;
 use App\Models\Transaction;
+use App\Models\Order;
+use App\Models\User;
 use App\Models\Food_Order;
+use App\Notifications\orderOperations;
 use App\Http\Resources\TransactionResource;
 class FatooraController extends Controller
 {
@@ -121,7 +124,7 @@ class FatooraController extends Controller
             'total'=>$request->total_price
         ];
         $user->notify(new orderOperations($OrderData));
-   
+
         return $transaction;
 
     }
