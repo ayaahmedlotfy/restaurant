@@ -46,8 +46,8 @@ class FatooraController extends Controller
             'CustomerEmail'=>$request->email,
             // 'CustomerEmail'=>'haa@gmail.com',
             'CustomerMobile'=>$request->phone,
-            // 'CallBackUrl'=>'http://127.0.0.1:8000/api/call_back',
-             'CallBackUrl'=>'http://127.0.0.1:4200/paid',
+            'CallBackUrl'=>'http://127.0.0.1:8000/api/call_back',
+             //'CallBackUrl'=>'http://127.0.0.1:4200/paid',
             'ErrorUrl'=>'https://www.youtube.com',
             'Language'=>'en',
             'DisplayCurrencyIso'=>'egp'
@@ -93,8 +93,8 @@ class FatooraController extends Controller
         $transaction->InvoiceURL=$datapay["Data"]["InvoiceURL"];
         $transaction->total_price=$request->total_price;
         $transaction->order_id=$request->order_id;
-         $transaction->status=$request->status;
-         $transaction->PaymentId=$request->PaymentId;
+        //  $transaction->status=$request->status;
+        //  $transaction->PaymentId=$request->PaymentId;
         $transaction->save();
 
         return $transaction;
