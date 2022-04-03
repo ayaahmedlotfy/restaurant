@@ -47,7 +47,8 @@ class orderOperations extends Notification implements ShouldQueue
         return (new MailMessage)
                     ->line($this->OrderData['Hello'].' '.$this->OrderData['username'])
                     ->line($this->OrderData['orderText'].' '. $this->OrderData['arrival'])             
-                    ->line($this->OrderData['Thankyou'].' '. $this->OrderData['order_id']);              
+                    ->line($this->OrderData['total_msg'].' '. $this->OrderData['total'])
+                    ->line($this->OrderData['Thankyou'].' '. $this->OrderData['order_id']);          
             }
 
     /**
@@ -65,7 +66,10 @@ class orderOperations extends Notification implements ShouldQueue
            'user_id'=>$this->OrderData['id'],
            'message'=>$this->OrderData['orderText'],
            'order_id'=>$this->OrderData['order_id'],
-           'arrival'=>$this->OrderData['arrival']
+           'arrival'=>$this->OrderData['arrival'],
+           'total_msg'=>$this->OrderData['total_msg'],
+           'total'=>$this->OrderData['total']
+
         ];
     }
 }

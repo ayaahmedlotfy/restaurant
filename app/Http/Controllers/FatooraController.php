@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\FatooraService;
 use Illuminate\Support\Facades\Http;
 use App\Models\Transaction;
+use App\Models\Food_Order;
 use App\Http\Resources\TransactionResource;
 class FatooraController extends Controller
 {
@@ -96,7 +97,31 @@ class FatooraController extends Controller
          $transaction->status=$request->status;
          $transaction->PaymentId=$request->PaymentId;
         $transaction->save();
-
+        //notifications part
+        $order = Order::find($request->order_id);
+        $user=User::find($order->user_id);
+        $food_order = Food_Order::Where('order_id',$request->order_id)->get();
+        $quantity=0;
+        foreach ( $food_order as $food)
+        {
+         $quantity+=$food->quantity;
+        }
+        $time=($quantity*5)+20;
+        $hours = floor($time / 60);
+        $minutes = $time % 60;
+        $OrderData=[
+            'Hello'=>"Hello from our team we are here to help you",
+            'username'=>$user['name'],
+            'id'=>$user['id'],
+            'orderText'=>"you've created your order and it will be delivered for you after ",
+            'arrival'=>$hours.' hours and '.$minutes.' minutes',
+            'Thankyou'=>"Thank you for making order and your order ID is ",
+            'order_id'=>$request->order_id,
+            'total_msg'=>'and the total price is',
+            'total'=>$request->total_price
+        ];
+        $user->notify(new orderOperations($OrderData));
+   
         return $transaction;
 
     }
