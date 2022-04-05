@@ -52,7 +52,7 @@ class FatooraController extends Controller
             'CustomerMobile'=>$request->phone,
             'CallBackUrl'=>'http://127.0.0.1:8000/api/call_back',
              //'CallBackUrl'=>'http://127.0.0.1:4200/paid',
-            'ErrorUrl'=>'https://www.youtube.com',
+            // 'ErrorUrl'=>'https://www.youtube.com',
             'Language'=>'en',
             'DisplayCurrencyIso'=>'egp'
         ];
@@ -71,7 +71,6 @@ class FatooraController extends Controller
         $data['KeyType']='paymentId';
 
         $paymentData=$this->FatooraService->getPaymentStatus($data);
-
         $transaction=Transaction::where('InvoiceId','=',$paymentData['Data']['InvoiceId'])
         ->limit(1)
         ->update(['status' => $paymentData['Data']['InvoiceStatus']]);
