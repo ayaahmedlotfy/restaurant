@@ -18,10 +18,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-            // return Food::all();
-
             return FoodResource::collection(Food::all());
-
     }
 
     /**
@@ -32,34 +29,15 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //  $table->unsignedBigInteger('category_id')->nullable();
-        //  $table->foreign('category_id')->references('id')->on('categories');1
-        // $role=Auth::user()->role;
-        // if($role =='1'){
-
         $food=new Food();
         $food->name=$request->name;
         $food->description=$request->description;
         $food->price=$request->price;
         $food->category_id=$request->category_id;
         $food->numOfItem=$request->numOfItem;
-        // $food->image=$request->image;
         $food->imagepath=$request->imagepath;
 
-
-        // $image = $request->file('image');
-        // $food->imagepath=$image;
-
-
-        // $imageName = time().'.'.$image->getClientOriginalExtension();
-        // $image->move(public_path('images'), $imageName);
-
-        // $food->image = $imageName;
-
         $food->save();
-    // }
-    // else{return "u are user u can not store food";}
-
      }
 
     /**
@@ -83,23 +61,13 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $role=Auth::user()->role;
-        // if($role =='1'){
             $food = Food::find($id);
             $food->name=$request->name;
             $food->description=$request->description;
             $food->price=$request->price;
-
-            if($request->hasFile('image')){
-                $image = $request->file('image');
-                $imageName = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('images'), $imageName);
-                $food->image = $imageName;
-            }
+            $food->category_id=$request->category_id;
+            $food->imagepath=$request->imagepath;
             $food->save();
-    // }
-    // else{return "u are user u can not update food";}
-
      }
 
     /**
@@ -110,16 +78,6 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
-        // $role=Auth::user()->role;
-        // if($role =='1'){
-        $i=Food::find($id);
-        $currphoto=$i->image;
-         $userPhoto=public_path('images/').$currphoto;
-         if (file_exists($userPhoto)){
-             @unlink($userPhoto);
-         }
           Food::destroy($id);
-    //     }
-    //     else{return "u are user u can not delete food";}
     }
 }
