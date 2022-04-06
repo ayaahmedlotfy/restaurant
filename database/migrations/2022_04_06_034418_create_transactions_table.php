@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('total_price');
             $table->string('status')->default('not-paid');
             $table->string('PaymentId')->nullable();
-            
+            $table->string('address');
+
             $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders');
 

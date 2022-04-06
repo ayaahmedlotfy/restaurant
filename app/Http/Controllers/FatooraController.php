@@ -73,7 +73,7 @@ class FatooraController extends Controller
         $paymentData=$this->FatooraService->getPaymentStatus($data);
         $transaction=Transaction::where('InvoiceId','=',$paymentData['Data']['InvoiceId'])
         ->limit(1)
-        ->update(['status' => $paymentData['Data']['InvoiceStatus']]);
+        ->update(['status' => 'paid']);
 
         return redirect()->away('http://127.0.0.1:4200/paid');
     }
@@ -96,6 +96,7 @@ class FatooraController extends Controller
         $transaction->InvoiceURL=$datapay["Data"]["InvoiceURL"];
         $transaction->total_price=$request->total_price;
         $transaction->order_id=$request->order_id;
+        $transaction->address=$request->address;
         //  $transaction->status=$request->status;
         //  $transaction->PaymentId=$request->PaymentId;
         $transaction->save();
@@ -134,10 +135,10 @@ class FatooraController extends Controller
      * @param  int  $order_id
      * @return \Illuminate\Http\Response
      */
-    public function show($user_name)
+    public function show($id)
     {
         //
-       return Transaction::find($user_name);
+       return Transaction::find($id);
     }
     /**
      * Show the form for editing the specified resource.
