@@ -57,7 +57,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::middleware(['auth:sanctum'])->group(function(){
 
 
-    @Crossorigin;
  Route::get('/foods',[FoodController::class, "index"]);
  Route::post('/foods',[FoodController::class, "store"]);
  Route::get('/foods/{id}',[FoodController::class, "show"]);
