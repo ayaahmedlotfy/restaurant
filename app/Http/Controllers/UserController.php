@@ -55,7 +55,7 @@ class UserController extends Controller
         else{
             return "There is no user with this id";
         }
-       
+
     }
 
     /**
@@ -72,10 +72,12 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name=$request->name;
         $user->email=$request->email;
-        $user->phone=$request->phone;
-        $user->address=$request->address;
+        // $user->phone=$request->phone;
+        // $user->address=$request->address;
+        $user->role=$request->role;
+
         // $user->password=$request->password;
-        
+
         $user->save();
         Mail::to($request->email)->send(new UpdatedUserMail());
         return "Updated";
@@ -99,6 +101,6 @@ class UserController extends Controller
         }
         else
         return "There is no user with this id";
-       
+
     }
 }
