@@ -20,6 +20,7 @@ class NotificationController extends Controller
      $last=$notification->data;
     }
     return $last;
+    // return $notifications;
     }
 
     /**
