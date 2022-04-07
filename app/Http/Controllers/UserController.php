@@ -35,6 +35,7 @@ class UserController extends Controller
         $user->phone=$request->phone;
         $user->address=$request->address;
         $user->password=$request->password;
+        $user->role$request->role
         $user->save();
         return "Stored";
     }
